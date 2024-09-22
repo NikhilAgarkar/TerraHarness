@@ -2,9 +2,10 @@
 
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-resources"
-  location = "US Central"
+  location = "Central US"
 }
 
+# Updated Location in main
 resource "azurerm_virtual_network" "main" {
   name                = "${var.prefix}-network"
   address_space       = ["10.0.0.0/16"]
