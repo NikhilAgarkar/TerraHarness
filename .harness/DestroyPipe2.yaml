@@ -1,0 +1,51 @@
+pipeline:
+  name: DestroyPipe-2
+  identifier: DestroyPipe2
+  projectIdentifier: Project2
+  orgIdentifier: default
+  tags: {}
+  stages:
+    - stage:
+        name: Destroy
+        identifier: Destroy
+        description: ""
+        type: IACM
+        spec:
+          platform:
+            os: Linux
+            arch: Amd64
+          runtime:
+            type: Cloud
+            spec: {}
+          workspace: Proj2Workspace
+          execution:
+            steps:
+              - step:
+                  type: IACMTerraformPlugin
+                  name: init
+                  identifier: init
+                  timeout: 10m
+                  spec:
+                    command: init
+              - step:
+                  type: IACMTerraformPlugin
+                  name: planDestroy
+                  identifier: planDestroy
+                  timeout: 10m
+                  spec:
+                    command: plan-destroy
+              - step:
+                  type: IACMApproval
+                  name: IACMApproval_1
+                  identifier: IACMApproval_1
+                  spec:
+                    autoApprove: true
+                  timeout: 1h
+              - step:
+                  type: IACMTerraformPlugin
+                  name: destroy
+                  identifier: destroy
+                  timeout: 10m
+                  spec:
+                    command: destroy
+        tags: {}
