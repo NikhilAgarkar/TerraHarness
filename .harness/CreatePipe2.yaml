@@ -1,0 +1,44 @@
+pipeline:
+  name: Create-Pipe2
+  identifier: CreatePipe2
+  projectIdentifier: Project2
+  orgIdentifier: default
+  tags: {}
+  stages:
+    - stage:
+        name: CreateInfra
+        identifier: CreateInfra
+        description: ""
+        type: IACM
+        spec:
+          platform:
+            os: Linux
+            arch: Amd64
+          runtime:
+            type: Cloud
+            spec: {}
+          workspace: Proj2Workspace
+          execution:
+            steps:
+              - step:
+                  type: IACMTerraformPlugin
+                  name: init
+                  identifier: init
+                  timeout: 10m
+                  spec:
+                    command: init
+              - step:
+                  type: IACMTerraformPlugin
+                  name: plan
+                  identifier: plan
+                  timeout: 10m
+                  spec:
+                    command: plan
+              - step:
+                  type: IACMTerraformPlugin
+                  name: apply
+                  identifier: apply
+                  timeout: 10m
+                  spec:
+                    command: apply
+        tags: {}
